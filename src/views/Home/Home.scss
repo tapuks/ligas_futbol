@@ -1,0 +1,19 @@
+.home {
+    margin-top: 150px;
+
+    .col-md-6 {
+        display: flex !important;
+        justify-content: center !important;
+        margin-top: 50px !important;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .home {
+        .col-12 {
+
+            margin-top: 20px !important;
+        }
+    }
+}

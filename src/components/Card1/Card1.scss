@@ -1,0 +1,19 @@
+.card-1 {
+
+    .card {
+        text-align: center;
+        background-color: #4D7EA8;
+        border: none !important;
+
+        &-body {
+            a {
+                text-decoration: none;
+                color: white;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
