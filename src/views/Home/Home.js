@@ -13,7 +13,6 @@ export default function Home() {
 
 
     const leagues = useFetch(`${URL_API}leagues?${TOKEN}`)
-    console.log(leagues);
 
     if (leagues.loading || !leagues.result) {
         return (

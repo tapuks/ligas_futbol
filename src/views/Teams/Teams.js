@@ -23,8 +23,7 @@ export default function Teams() {
             <div className='teams'>
                 <Row>
                     {teams.result.data.map(function (team, index) {
-                        return <Col xs={12} md={3} ><Card1 data={team} link='plantilla' /></Col>
-
+                        return <Col xs={12} md={4} lg={3} key={index}><Card1 id={team.id} data={team} link='players' /></Col>
                     })}
                 </Row>
 

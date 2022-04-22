@@ -1,10 +1,16 @@
 .teams {
     margin-top: 150px;
 
-    .col-md-3 {
+    .col-md-3,
+    .col-12 {
+        margin-top: 50px !important;
+    }
+
+    .col-lg-6,
+    .col-md-4,
+    .col-12 {
         display: flex !important;
         justify-content: center !important;
-        margin-top: 50px !important;
     }
 
 }
