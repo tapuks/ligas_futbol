@@ -4,10 +4,11 @@ import Loading from '../Loading'
 import { Col, Row, Container, Card } from 'react-bootstrap'
 import logo from '../../assets/img/logo.png'
 import classNames from 'classnames'
+import { useEffect, useState } from 'react'
+
 
 
 import './Players.scss'
-import { isLabelWithInternallyDisabledControl } from '@testing-library/user-event/dist/utils'
 
 
 export default function Players(props) {
@@ -28,11 +29,11 @@ export default function Players(props) {
         <Container>
             <div className='players'>
 
-                {plantilla.result.data.map(function (player, index) {
-                    if (index < 10) {
+                {/* {plantilla.result.data.map(function (player, index) {
+                    if (index < 1) {
                         return <Col xs={12} key={index}> <CardPlayer player_id={player.player_id} /></Col>
                     }
-                })}
+                })} */}
             </div>
         </Container>
     )
@@ -41,13 +42,15 @@ export default function Players(props) {
 
 function CardPlayer(props) {
     const { player_id } = props
-    const player = useFetch(`${URL_API}players/${player_id}?${TOKEN}`)
-    if (!player.result || player.loading) {
-        return <Loading />
-    }
+    // const player = useFetch(`${URL_API}players/${player_id}?${TOKEN}`)
+    const [imgNationality, setImgNationality] = useState(null)
+    // if (!player.result || player.loading) {
+    //     return <Loading />
+    // }
 
-    console.log('player', player);
-    const { position_id, common_name, nationality, birthdate, image_path } = player.result.data
+    // console.log('player', player);
+    // const { position_id, lastname, nationality, birthdate, image_path } = player.result.data
+
 
 
     // PONER UN DIV CON EL 80 % CENTRADOENTTRE MEDIO
@@ -56,15 +59,42 @@ function CardPlayer(props) {
     //  ARREGLAR EL NOMBRE QUE ES DEMASIADO LARGO TRALLENDO SOLO EL APELLIDO
 
 
+
+
+
     return (
 
         <>
-            <div className='card-player' style={{ backgroundImage: `url(${image_path})` }}>
+            <GetImgNationality setImgNationality={setImgNationality} nationality={3} />
+            <div className='card-player'>
+                {/* <div className='card-player-photo' style={{ backgroundImage: `url(${image_path})` }}></div>
+                <div className='card-player-name' >{lastname.slice(0, 11)}</div> */}
+                {/* <div className='card-player-number'>{position_id}</div> */}
+                <div className='card-player-country' style={imgNationality ? { backgroundImage: `url(${imgNationality})` } : ''} ></div>
 
-                <div className='card-player-name' >{common_name}</div>
+
             </div>
 
         </>
     )
+
+}
+
+function GetImgNationality(props) {
+    const { setImgNationality, nationality } = props
+    const countries = useFetch(`${URL_API}countries?${TOKEN}`)
+
+    if (!countries.result || countries.loading) {
+        return <Loading />
+    }
+    else {
+        countries.result.data.map(function (item) {
+            if (item.name == nationality) {
+                setImgNationality(item.image_path)
+            }
+
+        })
+    }
+
 
 }
